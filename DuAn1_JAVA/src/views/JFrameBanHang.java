@@ -4,6 +4,17 @@
  */
 package views;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import model.chiTietSanPham;
+import model.danhMuc;
+import service.banHangService;
+
 /**
  *
  * @author trung
@@ -15,6 +26,8 @@ public class JFrameBanHang extends javax.swing.JFrame {
      */
     public JFrameBanHang() {
         initComponents();
+        fillTableDanhSachSP();
+        fillDanhMuc();
     }
 
     /**
@@ -413,7 +426,7 @@ public class JFrameBanHang extends javax.swing.JFrame {
                     .addComponent(btnTaoHD, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addContainerGap())
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnHuyHD, btnTaoHD, btnThanhToan});
@@ -425,6 +438,12 @@ public class JFrameBanHang extends javax.swing.JFrame {
         jLabel3.setText("Giỏ hàng");
 
         jLabel4.setText("Danh sách sản phẩm");
+
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Loại sản phẩm");
 
@@ -507,7 +526,7 @@ public class JFrameBanHang extends javax.swing.JFrame {
                         .addComponent(btnXoa)))
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel4)
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,8 +536,11 @@ public class JFrameBanHang extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(cboSizeSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -538,7 +560,8 @@ public class JFrameBanHang extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -567,6 +590,17 @@ public class JFrameBanHang extends javax.swing.JFrame {
         setVisible(false);
         new JFrameChiTietHoaDon().setVisible(true);
     }//GEN-LAST:event_btnChiTietHoaDonActionPerformed
+
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tblDanhSachSP.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        tblDanhSachSP.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(txtTimKiem.getText()));
+        if(txtTimKiem.getText() == null){
+            fillTableDanhSachSP();
+        }
+    }//GEN-LAST:event_txtTimKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -660,4 +694,36 @@ public class JFrameBanHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtTienKhachDua;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    banHangService bhService = new banHangService();
+
+    void fillTableDanhSachSP() {
+        List<chiTietSanPham> listCTSP = bhService.listAll();
+        
+        DefaultTableModel model = (DefaultTableModel) tblDanhSachSP.getModel();
+        model.setRowCount(0);
+        for (chiTietSanPham CTSP : listCTSP) {
+            Object[] data = {
+                CTSP.getMaCTSP(), CTSP.getTenSP(), CTSP.getTenSize(), CTSP.getTenMS(), CTSP.getTenCL(),
+                CTSP.getTenCLDe(), CTSP.getSoLuong(), CTSP.getDonGia()
+            };
+            model.addRow(data);
+        }
+    }
+    
+    void fillDanhMuc(){
+        ArrayList<String> listDanhMuc =  new ArrayList<>();;
+        listDanhMuc = bhService.getMaDanhMuc();
+        
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiSP.getModel();
+        
+        model.removeAllElements();
+        String[] danhMuc= new String[listDanhMuc.size()];
+        for (int i = 0; i < listDanhMuc.size(); i++) {
+            danhMuc[i] = listDanhMuc.get(i);
+        }
+        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel(danhMuc));
+        
+    }
+
 }

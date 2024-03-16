@@ -9,27 +9,30 @@ public class chiTietSanPham {
     private int SoLuong;
     private float DonGia;
     private int MaSP;
-    private int MaCLDe;
-    private int MaSize;
-    private int MaMS;
-    private int MaCL;
+    private String TenCLDe;
+    private String TenSize;
+    private String TenMS;
+    private String TenCL;
+        private float MucGG;
     private String MoTa;
-    private int MaGG;
+
+    private String tenSP;
 
     public chiTietSanPham() {
     }
 
-    public chiTietSanPham(int MaCTSP, int SoLuong, float DonGia, int MaSP, int MaCLDe, int MaSize, int MaMS, int MaCL, String MoTa, int MaGG) {
+    public chiTietSanPham(int MaCTSP, int SoLuong, float DonGia, int MaSP, String TenCLDe, String TenSize, String TenMS, String TenCL, String MoTa, float MucGG, String tenSP) {
         this.MaCTSP = MaCTSP;
         this.SoLuong = SoLuong;
         this.DonGia = DonGia;
         this.MaSP = MaSP;
-        this.MaCLDe = MaCLDe;
-        this.MaSize = MaSize;
-        this.MaMS = MaMS;
-        this.MaCL = MaCL;
+        this.TenCLDe = TenCLDe;
+        this.TenSize = TenSize;
+        this.TenMS = TenMS;
+        this.TenCL = TenCL;
         this.MoTa = MoTa;
-        this.MaGG = MaGG;
+        this.MucGG = MucGG;
+        this.tenSP = tenSP;
     }
 
     public int getMaCTSP() {
@@ -64,36 +67,36 @@ public class chiTietSanPham {
         this.MaSP = MaSP;
     }
 
-    public int getMaCLDe() {
-        return MaCLDe;
+    public String getTenCLDe() {
+        return TenCLDe;
     }
 
-    public void setMaCLDe(int MaCLDe) {
-        this.MaCLDe = MaCLDe;
+    public void setTenCLDe(String TenCLDe) {
+        this.TenCLDe = TenCLDe;
     }
 
-    public int getMaSize() {
-        return MaSize;
+    public String getTenSize() {
+        return TenSize;
     }
 
-    public void setMaSize(int MaSize) {
-        this.MaSize = MaSize;
+    public void setTenSize(String TenSize) {
+        this.TenSize = TenSize;
     }
 
-    public int getMaMS() {
-        return MaMS;
+    public String getTenMS() {
+        return TenMS;
     }
 
-    public void setMaMS(int MaMS) {
-        this.MaMS = MaMS;
+    public void setTenMS(String TenMS) {
+        this.TenMS = TenMS;
     }
 
-    public int getMaCL() {
-        return MaCL;
+    public String getTenCL() {
+        return TenCL;
     }
 
-    public void setMaCL(int MaCL) {
-        this.MaCL = MaCL;
+    public void setTenCL(String TenCL) {
+        this.TenCL = TenCL;
     }
 
     public String getMoTa() {
@@ -104,12 +107,22 @@ public class chiTietSanPham {
         this.MoTa = MoTa;
     }
 
-    public int getMaGG() {
-        return MaGG;
+    public float getMucGG() {
+        return MucGG;
     }
 
-    public void setMaGG(int MaGG) {
-        this.MaGG = MaGG;
+    public void setMucGG(float MucGG) {
+        this.MucGG = MucGG;
     }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
+    }
+
     
+
 }

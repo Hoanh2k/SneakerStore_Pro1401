@@ -2,10 +2,11 @@ package utilities;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.sql.Connection;
+import java.sql.*;
 
 public class JdbcHelper {
     
+        @SuppressWarnings("empty-statement")
     public static Connection getConnection() throws SQLServerException {
 
 //        try {
@@ -31,4 +32,5 @@ public class JdbcHelper {
         System.out.println(getConnection());
 
     }
+     
 }
