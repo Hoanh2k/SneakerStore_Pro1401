@@ -1,8 +1,8 @@
-﻿CREATE DATABASE Sneacker_Store
+﻿CREATE DATABASE SneakerStore
 GO
-USE Sneacker_Store
+USE SneakerStore
 GO
---drop database Sneacker_Store
+--drop database SneakerStore
 
 create table  DANH_MUC
 (
@@ -272,3 +272,7 @@ alter table Chi_Tiet_San_Pham add MaGG int
 ALTER TABLE Chi_Tiet_San_Pham
 ADD CONSTRAINT FK_MaGG
 FOREIGN KEY (MaGG) REFERENCES Giam_Gia(MaGG);
+
+select * from NHAN_VIEN
+select * from Giam_Gia
+

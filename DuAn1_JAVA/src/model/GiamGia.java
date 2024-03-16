@@ -11,7 +11,7 @@ import java.util.Date;
  * @author trung
  */
 public class GiamGia {
-    private String maGG;
+    private int maGG;
     private String tenMaGiam;
     private Float mucGiam;
     private Date ngayBatDau;
@@ -21,7 +21,7 @@ public class GiamGia {
     public GiamGia() {
     }
 
-    public GiamGia(String maGG, String tenMaGiam, Float mucGiam, Date ngayBatDau, Date ngayKetThuc, String ghiChu) {
+    public GiamGia(int maGG, String tenMaGiam, Float mucGiam, Date ngayBatDau, Date ngayKetThuc, String ghiChu) {
         this.maGG = maGG;
         this.tenMaGiam = tenMaGiam;
         this.mucGiam = mucGiam;
@@ -30,11 +30,11 @@ public class GiamGia {
         this.ghiChu = ghiChu;
     }
 
-    public String getMaGG() {
+    public int getMaGG() {
         return maGG;
     }
 
-    public void setMaGG(String maGG) {
+    public void setMaGG(int maGG) {
         this.maGG = maGG;
     }
 
@@ -78,7 +78,6 @@ public class GiamGia {
         this.ghiChu = ghiChu;
     }
 
-   
     
     
 }

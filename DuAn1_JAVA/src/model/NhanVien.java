@@ -11,21 +11,21 @@ import java.util.Date;
  * @author trung
  */
 public class NhanVien {
-    private String maNv;
+    private int maNv;
     private String tenDangNhap;
     private String matKhau;
     private String hoTen;
-    private boolean gioiTinh;
+    private int gioiTinh;
     private String dienThoai;
     private String email;
     private Date ngayTao;
-    private boolean chucVu;
-    private boolean trangThai;
+    private int chucVu;
+    private int trangThai;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNv, String tenDangNhap, String matKhau, String hoTen, boolean gioiTinh, String dienThoai, String email, Date ngayTao, boolean chucVu, boolean trangThai) {
+    public NhanVien(int maNv, String tenDangNhap, String matKhau, String hoTen, int gioiTinh, String dienThoai, String email, Date ngayTao, int chucVu, int trangThai) {
         this.maNv = maNv;
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
@@ -38,11 +38,11 @@ public class NhanVien {
         this.trangThai = trangThai;
     }
 
-    public String getMaNv() {
+    public int getMaNv() {
         return maNv;
     }
 
-    public void setMaNv(String maNv) {
+    public void setMaNv(int maNv) {
         this.maNv = maNv;
     }
 
@@ -70,11 +70,11 @@ public class NhanVien {
         this.hoTen = hoTen;
     }
 
-    public boolean isGioiTinh() {
+    public int getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(boolean gioiTinh) {
+    public void setGioiTinh(int gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
@@ -102,23 +102,23 @@ public class NhanVien {
         this.ngayTao = ngayTao;
     }
 
-    public boolean isChucVu() {
+    public int getChucVu() {
         return chucVu;
     }
 
-    public void setChucVu(boolean chucVu) {
+    public void setChucVu(int chucVu) {
         this.chucVu = chucVu;
     }
 
-    public boolean isTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
+   
     
     
 }
