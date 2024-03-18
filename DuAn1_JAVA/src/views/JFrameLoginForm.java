@@ -4,6 +4,8 @@
  */
 package views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author trung
@@ -30,17 +32,18 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtTenDangNhap = new javax.swing.JPasswordField();
         btndangnhap = new javax.swing.JButton();
         btnketthuc = new javax.swing.JButton();
         txtMatKhau = new javax.swing.JPasswordField();
         jlbQuenMatKhau = new javax.swing.JLabel();
+        jckRememberName = new javax.swing.JCheckBox();
+        txtTenDangNhap = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -49,12 +52,6 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         jLabel2.setText("Tên Đăng Nhập");
 
         jLabel3.setText("Mật Khẩu ");
-
-        txtTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenDangNhapActionPerformed(evt);
-            }
-        });
 
         btndangnhap.setText("Đăng Nhập");
         btndangnhap.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +77,19 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         jlbQuenMatKhau.setForeground(new java.awt.Color(255, 0, 51));
         jlbQuenMatKhau.setText("Quên mật khẩu ?");
 
+        jckRememberName.setText("Lưu thông tin tài khoản");
+        jckRememberName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckRememberNameActionPerformed(evt);
+            }
+        });
+
+        txtTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenDangNhapActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -89,26 +99,31 @@ public class JFrameLoginForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(93, 93, 93))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnketthuc, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMatKhau)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btndangnhap)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(btndangnhap)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnketthuc, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jlbQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jlbQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jckRememberName)))
+                .addContainerGap(87, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtTenDangNhap)
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(54, 54, 54))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,18 +133,20 @@ public class JFrameLoginForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
+                .addComponent(jckRememberName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btndangnhap)
                     .addComponent(btnketthuc))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlbQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconSwing/bannerLogin.jpg"))); // NOI18N
@@ -140,38 +157,68 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDangNhapActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenDangNhapActionPerformed
-
     private void btndangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndangnhapActionPerformed
-        
+        String dangNhap = txtTenDangNhap.getText();
+        String matKhau = new String(txtMatKhau.getPassword());
+
+        StringBuilder sb = new StringBuilder();
+        if (dangNhap.equals("")) {
+            sb.append("Tên đăng nhập bị trống!\n");
+        }
+
+        if (matKhau.equals("")) {
+            sb.append("Mật khẩu bị trống!\n");
+        }
+        if (sb.length() > 0) {
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invadation",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (dangNhap.equals("fpt") && matKhau.equals("polytechnic")) {
+            JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
+            if (jckRememberName.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Lưu thông tin tài khoản thành công!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng!","Đăng nhập thất bại!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btndangnhapActionPerformed
 
     private void btnketthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnketthucActionPerformed
-       
+                txtTenDangNhap.setText("");
+                txtMatKhau.setText("");
+                jckRememberName.setSelected(true);
+                
     }//GEN-LAST:event_btnketthucActionPerformed
 
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMatKhauActionPerformed
+
+    private void jckRememberNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckRememberNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jckRememberNameActionPerformed
+
+    private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDangNhapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenDangNhapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,8 +263,9 @@ public class JFrameLoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JCheckBox jckRememberName;
     private javax.swing.JLabel jlbQuenMatKhau;
     private javax.swing.JPasswordField txtMatKhau;
-    private javax.swing.JPasswordField txtTenDangNhap;
+    private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 }
