@@ -264,7 +264,13 @@ NgayKetThuc date,
 GhiChu nvarchar(100)
 )
 
+
+select * from Giam_Gia
+
 insert into Giam_Gia values (N'Giảm Giá 1', 2000, '2024-03-03', '2024-04-01', N'Giảm giá sản phẩm bán ít')
+insert into Giam_Gia values (N'Giảm Giá 2', 100000, '2024-03-03', '2024-04-01', N'Giảm giá sản phẩm bán ít')
+insert into Giam_Gia values (N'Giảm Giá 3', 200000, '2024-03-03', '2024-04-01', N'Giảm giá sản phẩm bán ít')
+
 
 alter table Chi_Tiet_San_Pham add MaGG int
 --select * from Chi_Tiet_San_Pham

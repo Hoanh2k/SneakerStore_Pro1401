@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/DuAn1_Java_Swing/DuAn1_JAVA/src/Interface/GiamGiaInterface.java</file>
             <file>file:/D:/DuAn1_Java_Swing/DuAn1_JAVA/src/views/JFrameGiamGia.java</file>
             <file>file:/D:/DuAn1_Java_Swing/DuAn1_JAVA/src/views/JFrameNhanVien.java</file>
+            <file>file:/D:/DuAn1_Java_Swing/DuAn1_JAVA/src/repository/GiamGiaRepository.java</file>
+            <file>file:/D:/DuAn1_Java_Swing/DuAn1_JAVA/src/service/GiamGiaService.java</file>
             <file>file:/D:/DuAn1_Java_Swing/DuAn1_JAVA/src/Interface/NhanVienInterface.java</file>
         </group>
     </open-files>

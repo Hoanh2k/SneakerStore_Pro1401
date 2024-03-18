@@ -15,7 +15,7 @@ public interface NhanVienInterface <NhanVien123> {
     
     void insert (NhanVien123 nhanvien);
     void update (NhanVien123 nhanvien, String index);
-    void delete (NhanVien123 index);
+    void delete (int id);
     List<NhanVien123> findAll();
     NhanVien123 findById (String index);
 

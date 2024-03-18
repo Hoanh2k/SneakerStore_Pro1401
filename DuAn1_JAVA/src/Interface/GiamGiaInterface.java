@@ -13,7 +13,7 @@ import java.util.List;
 public interface GiamGiaInterface <GiamGia123> {
     void insert (GiamGia123 giamGia);
     void update (GiamGia123 giamGia, String index);
-    void delete (GiamGia123 index);
+    void delete (int id);
     List<GiamGia123> findAll();
     GiamGia123 findById (String index);
 }

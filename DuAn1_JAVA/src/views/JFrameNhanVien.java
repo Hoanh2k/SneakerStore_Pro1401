@@ -4,6 +4,13 @@
  */
 package views;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.NhanVien;
 import repository.NhanVienRepository;
@@ -16,44 +23,43 @@ import service.NhanVienService;
 public class JFrameNhanVien extends javax.swing.JFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
-    
+
     private NhanVienService nhanVienService;
-    
-    private NhanVienRepository nhanVienRepository = new NhanVienRepository();
-    
-    public JFrameNhanVien() {
+
+    public JFrameNhanVien() throws SQLServerException {
         initComponents();
         setLocationRelativeTo(null);
         loadTable();
+        this.nhanVienService = new NhanVienService();
     }
-    
-    public void loadTable (){
+
+    public void loadTable() throws SQLServerException {
         NhanVienRepository nhanVienRepository = new NhanVienRepository();
-        
+
         dtm = (DefaultTableModel) tblNhanVien.getModel();
         dtm.setRowCount(0);
-        
-        for(NhanVien nhanVien : nhanVienRepository.getAllNhanViens()){
-                     
+
+        for (NhanVien nhanVien : nhanVienRepository.getAllNhanViens()) {
+
             Object[] rowData = new Object[]{
                 nhanVien.getMaNv(),
                 nhanVien.getTenDangNhap(),
                 nhanVien.getMatKhau(),
                 nhanVien.getHoTen(),
-                nhanVien.getGioiTinh()== 1 ? "Nam" : "Nữ",
+                nhanVien.getGioiTinh() == 1 ? "Nam" : "Nữ",
                 nhanVien.getDienThoai(),
                 nhanVien.getEmail(),
                 nhanVien.getNgayTao(),
-                nhanVien.getChucVu()== 1 ? "FullTime" : "PartTime",
-                nhanVien.getTrangThai()== 1 ? "Đi làm" : "Nghỉ làm"
+                nhanVien.getChucVu() == 1 ? "Admin" : "Nhân Viên",
+                nhanVien.getTrangThai() == 1 ? "Đi làm" : "Nghỉ làm"
             };
             dtm.addRow(rowData);
-            }
         }
-    
-    public void mouseClick(){
+    }
+
+    public void mouseClick() {
         int row = tblNhanVien.getSelectedRow();
-        if (row < 0){
+        if (row < 0) {
             return;
         }
         txtMaNV.setText(tblNhanVien.getValueAt(row, 0).toString());
@@ -71,8 +77,8 @@ public class JFrameNhanVien extends javax.swing.JFrame {
         cboChucVu.setSelectedItem(tblNhanVien.getValueAt(row, 8).toString());
         cboTrangThaiNV.setSelectedItem(tblNhanVien.getValueAt(row, 9).toString());
     }
-    
-    public void clearForm(){
+
+    public void clearForm() {
         txtMaNV.setText("");
         txtTenDangNhap.setText("");
         txtMatKhau.setText("");
@@ -83,9 +89,70 @@ public class JFrameNhanVien extends javax.swing.JFrame {
         txtNgayTao.setText("");
         cboChucVu.setSelectedIndex(0);
         cboTrangThaiNV.setSelectedIndex(0);
-        
+
     }
-    
+
+    private NhanVien getDataNhanVien() {
+        NhanVien nhanVien = new NhanVien();
+        nhanVien.setMaNv(Integer.parseInt(txtMaNV.getText()));
+        nhanVien.setTenDangNhap(txtTenDangNhap.getText());
+        nhanVien.setMatKhau(txtMatKhau.getText());
+        nhanVien.setHoTen(txtHoTen.getText());
+        nhanVien.setGioiTinh(rdoNam.isSelected() ? 1 : 0);
+        nhanVien.setDienThoai(txtSDT.getText());
+        nhanVien.setEmail(txtEmail.getText());
+        nhanVien.setNgayTao(new Date()); // Cập nhật ngày tạo cho nhân viên mới
+
+        // Lấy giá trị chức vụ từ ComboBox
+        String chucVuStr = cboChucVu.getSelectedItem().toString();
+        int chucVu = cboChucVu.getSelectedIndex(); // Sử dụng chỉ số của ComboBox làm giá trị chức vụ
+        nhanVien.setChucVu(chucVu);
+
+        // Lấy giá trị trạng thái từ ComboBox
+        String trangThaiStr = cboTrangThaiNV.getSelectedItem().toString();
+        int trangThai = cboTrangThaiNV.getSelectedIndex(); // Sử dụng chỉ số của ComboBox làm giá trị trạng thái
+        nhanVien.setTrangThai(trangThai);
+
+        return nhanVien;
+    }
+
+    public void addNhanVien() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            NhanVien nhanVien = getDataNhanVien();
+            nhanVienService.insert(nhanVien);
+
+            JOptionPane.showMessageDialog(this, "thêm thành công");
+            loadTable();
+            clearForm();
+        } catch (Exception ex) {
+            Logger.getLogger(JFrameNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void deleteNhanVien() throws SQLServerException {
+        int banGhiChon = this.tblNhanVien.getSelectedRow();
+        if (banGhiChon == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn 1 dòng để Xóa");
+            return;
+        }
+
+        int maNV = Integer.parseInt(txtMaNV.getText()); // Chuyển đổi thành số nguyên
+
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+    if (dialogResult == JOptionPane.YES_OPTION) {
+        nhanVienService.delete(maNV);
+
+        loadTable();
+        clearForm();
+        JOptionPane.showMessageDialog(this, "Xóa thành công");
+    }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,6 +163,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jpnNavigation = new javax.swing.JPanel();
         btnTieuDe = new javax.swing.JButton();
         btnQuanLyNhanVien = new javax.swing.JButton();
@@ -250,10 +318,12 @@ public class JFrameNhanVien extends javax.swing.JFrame {
         jLabel8.setText("Giới tính : ");
 
         rdoNam.setBackground(new java.awt.Color(255, 255, 204));
+        buttonGroup1.add(rdoNam);
         rdoNam.setSelected(true);
         rdoNam.setText("Nam");
 
         rdoNu.setBackground(new java.awt.Color(255, 255, 204));
+        buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
 
         jLabel7.setText("Số điện thoại : ");
@@ -341,7 +411,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
 
         btnTimKiem.setText("Tìm kiếm");
 
-        cboChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FullTime", "PartTime" }));
+        cboChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Nhân Viên" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -498,7 +568,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhanVienActionPerformed
-        // TODO add your handling code here:
+        addNhanVien();
     }//GEN-LAST:event_btnThemNhanVienActionPerformed
 
     private void btnUpdateNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNhanVienActionPerformed
@@ -506,7 +576,11 @@ public class JFrameNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateNhanVienActionPerformed
 
     private void btnXoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNhanVienActionPerformed
-        // TODO add your handling code here:
+        try {
+            deleteNhanVien();
+        } catch (SQLServerException ex) {
+            Logger.getLogger(JFrameNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnXoaNhanVienActionPerformed
 
     private void btnClearFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearFormActionPerformed
@@ -550,7 +624,11 @@ public class JFrameNhanVien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameNhanVien().setVisible(true);
+                try {
+                    new JFrameNhanVien().setVisible(true);
+                } catch (SQLServerException ex) {
+                    Logger.getLogger(JFrameNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -564,6 +642,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnUpdateNhanVien;
     private javax.swing.JButton btnXoaNhanVien;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboChucVu;
     private javax.swing.JComboBox<String> cboTrangThaiNV;
     private javax.swing.JLabel jLabel1;

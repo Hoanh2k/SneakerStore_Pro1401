@@ -4,6 +4,11 @@
  */
 package views;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.GiamGia;
 import repository.GiamGiaRepository;
@@ -16,25 +21,26 @@ import service.GiamGiaService;
 public class JFrameGiamGia extends javax.swing.JFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
-    
+
     private GiamGiaService giamGiaService;
-    
+
     private GiamGiaRepository giamGiaRepository = new GiamGiaRepository();
-    
-    public JFrameGiamGia() {
+
+    public JFrameGiamGia() throws SQLServerException {
         initComponents();
         setLocationRelativeTo(null);
         loadTable();
+        this.giamGiaService = new GiamGiaService();
     }
-    
-    public void loadTable (){
+
+    public void loadTable() throws SQLServerException {
         GiamGiaRepository giamGiaRepository = new GiamGiaRepository();
-        
+
         dtm = (DefaultTableModel) tblGiamGia.getModel();
         dtm.setRowCount(0);
-        
-        for(GiamGia giamGia : giamGiaRepository.getAllGiamGias()){
-                     
+
+        for (GiamGia giamGia : giamGiaRepository.getAllGiamGias()) {
+
             Object[] rowData = new Object[]{
                 giamGia.getMaGG(),
                 giamGia.getTenMaGiam(),
@@ -42,15 +48,15 @@ public class JFrameGiamGia extends javax.swing.JFrame {
                 giamGia.getNgayBatDau(),
                 giamGia.getNgayKetThuc(),
                 giamGia.getGhiChu()
-               
+
             };
             dtm.addRow(rowData);
-            }
         }
-    
-    public void mouseClick(){
+    }
+
+    public void mouseClick() {
         int row = tblGiamGia.getSelectedRow();
-        if (row < 0){
+        if (row < 0) {
             return;
         }
         txtMaGG.setText(tblGiamGia.getValueAt(row, 0).toString());
@@ -60,16 +66,63 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         txtNgayKetThuc.setText(tblGiamGia.getValueAt(row, 4).toString());
         txtGhiChu.setText(tblGiamGia.getValueAt(row, 5).toString());
     }
-    
-    public void clearForm(){
+
+    public void clearForm() {
         txtMaGG.setText("");
         txtTenGG.setText("");
         txtMucGiam.setText("");
         txtNgayBatDau.setText("");
         txtNgayKetThuc.setText("");
         txtGhiChu.setText("");
-       
-        
+
+    }
+
+    private GiamGia getDataGiamGia() {
+        GiamGia giamGia = new GiamGia();
+        giamGia.setTenMaGiam(txtTenGG.getText());
+        giamGia.setMucGiam(Float.parseFloat(txtMucGiam.getText()));
+        giamGia.setNgayBatDau(new Date()); // Cập nhật ngày
+        giamGia.setNgayKetThuc(new Date()); // Cập nhật ngày 
+        giamGia.setGhiChu(txtGhiChu.getText());
+
+        return giamGia;
+    }
+
+    public void addGiamGia() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            GiamGia giamGia = getDataGiamGia();
+            giamGiaService.insert(giamGia);
+
+            JOptionPane.showMessageDialog(this, "Thêm giảm giá thành công");
+            loadTable();
+            clearForm();
+        } catch (Exception ex) {
+            Logger.getLogger(JFrameGiamGia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteGiamGia() throws SQLServerException {
+        int selectedRow = tblGiamGia.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn một dòng để xóa");
+            return;
+        }
+
+        int maGG = Integer.parseInt(tblGiamGia.getValueAt(selectedRow, 0).toString()); // Lấy mã giảm giá từ cột đầu tiên
+
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            giamGiaService.delete(maGG);
+
+            loadTable();
+            clearForm();
+            JOptionPane.showMessageDialog(this, "Xóa giảm giá thành công");
+        }
+
     }
 
     /**
@@ -426,7 +479,11 @@ public class JFrameGiamGia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClear2ActionPerformed
 
     private void btnXoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNhanVienActionPerformed
-        // TODO add your handling code here:
+        try {
+            deleteGiamGia();
+        } catch (SQLServerException ex) {
+            Logger.getLogger(JFrameGiamGia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnXoaNhanVienActionPerformed
 
     private void btnUpdateNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNhanVienActionPerformed
@@ -434,7 +491,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateNhanVienActionPerformed
 
     private void btnThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhanVienActionPerformed
-        // TODO add your handling code here:
+        addGiamGia();
     }//GEN-LAST:event_btnThemNhanVienActionPerformed
 
     private void tblGiamGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGiamGiaMouseClicked
@@ -474,7 +531,11 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameGiamGia().setVisible(true);
+                try {
+                    new JFrameGiamGia().setVisible(true);
+                } catch (SQLServerException ex) {
+                    Logger.getLogger(JFrameGiamGia.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

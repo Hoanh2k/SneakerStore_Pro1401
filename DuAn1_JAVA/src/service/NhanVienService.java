@@ -5,6 +5,7 @@
 package service;
 
 import Interface.NhanVienInterface;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.util.List;
 import model.NhanVien;
 import repository.NhanVienRepository;
@@ -14,11 +15,15 @@ import repository.NhanVienRepository;
  * @author trung
  */
 public class NhanVienService implements NhanVienInterface<NhanVien>{
-    private NhanVienRepository nhanVienRepository = new NhanVienRepository();
+    private NhanVienRepository nhanVienRepository;
+
+    public NhanVienService() throws SQLServerException {
+        this.nhanVienRepository = new NhanVienRepository();
+    }
 
     @Override
     public void insert(NhanVien nhanvien) {
-       
+       this.nhanVienRepository.addNhanVien(nhanvien);
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -28,7 +33,8 @@ public class NhanVienService implements NhanVienInterface<NhanVien>{
     }
 
     @Override
-    public void delete(NhanVien index) {
+    public void delete(int maNV) {
+        this.nhanVienRepository.delete(maNV);
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -4,6 +4,8 @@
  */
 package repository;
 
+import java.sql.*;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,10 +20,10 @@ import utilities.JdbcHelper;
  * @author trung
  */
 public class GiamGiaRepository {
-    
+
     private Connection connection;
 
-    public GiamGiaRepository() {
+    public GiamGiaRepository() throws SQLServerException {
         this.connection = JdbcHelper.getConnection();
     }
 
@@ -69,8 +71,56 @@ public class GiamGiaRepository {
     }
 
     private void handleSQLException(SQLException e) {
-        
+
         e.printStackTrace();
     }
-    
+
+    // Thêm giảm giá mới
+    public void addGiamGia(GiamGia giamGia) {
+        if (giamGia == null) {
+            return;
+        }
+
+        String sql = """
+        INSERT INTO Giam_Gia (TenMaGiam, MucGiam, NgayBatDau, NgayKetThuc, GhiChu)
+        VALUES (?, ?, ?, ?, ?)
+        """;
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, giamGia.getTenMaGiam());
+            stm.setFloat(2, giamGia.getMucGiam());                    
+            stm.setDate(3, new java.sql.Date(giamGia.getNgayBatDau().getTime()));
+            stm.setDate(4, new java.sql.Date(giamGia.getNgayKetThuc().getTime()));
+            stm.setString(5, giamGia.getGhiChu());
+
+            int check = stm.executeUpdate();
+
+            if (check > 0) {
+                System.out.println("Thêm giảm giá thành công");
+            } else {
+                System.out.println("Thêm giảm giá thất bại");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+// Xóa giảm giá
+    public void deleteGiamGia(int maGG) {
+        String sql = "DELETE FROM Giam_Gia WHERE MaGG = ?";
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, maGG);
+            int check = ps.executeUpdate();
+
+            if (check > 0) {
+                System.out.println("Xóa giảm giá thành công");
+            } else {
+                System.out.println("Xóa giảm giá thất bại");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
 }
