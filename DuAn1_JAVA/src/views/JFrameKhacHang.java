@@ -15,6 +15,7 @@ public class JFrameKhacHang extends javax.swing.JFrame {
      */
     public JFrameKhacHang() {
         initComponents();
+        //login ok
     }
 
     /**
