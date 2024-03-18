@@ -123,6 +123,8 @@ insert into CHI_TIET_SAN_PHAM values(20, 30000, 39, 23, 33,43, 50, 'Giay 1')
 --)
 --go
 --drop table nhan_vien
+
+
 create table NHAN_VIEN(
 	MaNV int IDENTITY(70,1) primary key,
 	TenDangNhap varchar(50) UNIQUE not null,
@@ -173,6 +175,7 @@ create table HOA_DON(
 )
 GO
 --ALTER TABLE Hoa_Don ALTER COLUMN TrangThai BIT;
+
 
 
 --ALTER TABLE Hoa_Don ADD CONSTRAINT df_TrangThai DEFAULT 1 FOR TrangThai
@@ -281,4 +284,13 @@ FOREIGN KEY (MaGG) REFERENCES Giam_Gia(MaGG);
 
 select * from NHAN_VIEN
 select * from Giam_Gia
+
+select * from SAN_PHAM
+select * from DANH_MUC
+select * from MAU_SAC
+select * from CHAT_LIEU
+select * from CHAT_LIEU_DE_GIAY
+select * from SIZE
+
+
 
