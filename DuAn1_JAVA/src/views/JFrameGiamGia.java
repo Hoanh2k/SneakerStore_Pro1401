@@ -145,7 +145,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtTimKiem = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         txtGhiChu = new javax.swing.JTextField();
         txtNgayKetThuc = new javax.swing.JTextField();
         txtNgayBatDau = new javax.swing.JTextField();
@@ -259,6 +259,8 @@ public class JFrameGiamGia extends javax.swing.JFrame {
 
         jLabel1.setText("Mã GG :");
 
+        txtMaGG.setEnabled(false);
+
         jLabel4.setText("Tên mã giảm :");
 
         jpnCRUD2.setBackground(new java.awt.Color(255, 204, 204));
@@ -332,6 +334,11 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         jLabel5.setText("Mức giảm :");
 
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         tblGiamGia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -359,7 +366,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnTimKiem)
                 .addGap(61, 61, 61))
@@ -406,7 +413,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -498,6 +505,15 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         mouseClick();
     }//GEN-LAST:event_tblGiamGiaMouseClicked
 
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        String ten = txtSearch.getText();
+        if (ten.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin");
+        } else {
+           JOptionPane.showMessageDialog(this, "Không tồn tại");
+        }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -572,7 +588,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
     private javax.swing.JTextField txtMucGiam;
     private javax.swing.JTextField txtNgayBatDau;
     private javax.swing.JTextField txtNgayKetThuc;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTenGG;
-    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

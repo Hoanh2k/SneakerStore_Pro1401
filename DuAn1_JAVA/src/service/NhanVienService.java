@@ -14,7 +14,8 @@ import repository.NhanVienRepository;
  *
  * @author trung
  */
-public class NhanVienService implements NhanVienInterface<NhanVien>{
+public class NhanVienService implements NhanVienInterface<NhanVien> {
+
     private NhanVienRepository nhanVienRepository;
 
     public NhanVienService() throws SQLServerException {
@@ -23,31 +24,38 @@ public class NhanVienService implements NhanVienInterface<NhanVien>{
 
     @Override
     public void insert(NhanVien nhanvien) {
-       this.nhanVienRepository.addNhanVien(nhanvien);
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.nhanVienRepository.addNhanVien(nhanvien);
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void update(NhanVien nhanvien, String index) {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void delete(int maNV) {
         this.nhanVienRepository.delete(maNV);
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<NhanVien> findAll() {
         return this.nhanVienRepository.getAllNhanViens();
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public NhanVien findById(String index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return this.nhanVienRepository.getNhanVienByTenDangNhap(index);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-    
-    
+
+    public NhanVien selectByTenDangNhap(String tenDangNhap) {
+        return this.nhanVienRepository.getNhanVienByTenDangNhap(tenDangNhap);
+    }
+
 }

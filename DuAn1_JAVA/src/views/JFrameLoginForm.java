@@ -4,7 +4,18 @@
  */
 package views;
 
+<<<<<<< HEAD
 import javax.swing.JOptionPane;
+=======
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.NhanVien;
+import repository.Auth;
+import repository.MsgBox;
+import service.NhanVienService;
+>>>>>>> hieuthu2
 
 /**
  *
@@ -12,11 +23,31 @@ import javax.swing.JOptionPane;
  */
 public class JFrameLoginForm extends javax.swing.JFrame {
 
+    private NhanVienService nhanVienService;
+
     /**
      * Creates new form JFrameLoginForm
      */
-    public JFrameLoginForm() {
+    public JFrameLoginForm() throws SQLServerException {
         initComponents();
+        this.nhanVienService = new NhanVienService();
+    }
+
+    private void dangNhap() {
+        String tenDangNhap = txtTenDangNhap.getText();
+        String matKhau = new String(txtMatKhau.getPassword());
+        NhanVien nv = nhanVienService.selectByTenDangNhap(tenDangNhap);
+        if (nv == null) {
+            MsgBox.alert(this, "Sai tên đăng nhập!");
+        } else if (!matKhau.equals(nv.getMatKhau())) {
+            MsgBox.alert(this, "Sai mật khẩu!");
+        } else {
+            Auth.User = nv;
+            JFrameMain frameMain = new JFrameMain();
+            frameMain.show();
+            dispose();
+            this.dispose();
+        }
     }
 
     /**
@@ -32,12 +63,15 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtTenDangNhap = new javax.swing.JPasswordField();
         btndangnhap = new javax.swing.JButton();
         btnketthuc = new javax.swing.JButton();
         txtMatKhau = new javax.swing.JPasswordField();
         jlbQuenMatKhau = new javax.swing.JLabel();
+<<<<<<< HEAD
         jckRememberName = new javax.swing.JCheckBox();
+=======
+        txtTenDangNhap = new javax.swing.JTextField();
+>>>>>>> hieuthu2
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,12 +86,6 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         jLabel2.setText("Tên Đăng Nhập");
 
         jLabel3.setText("Mật Khẩu ");
-
-        txtTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenDangNhapActionPerformed(evt);
-            }
-        });
 
         btndangnhap.setText("Đăng Nhập");
         btndangnhap.addActionListener(new java.awt.event.ActionListener() {
@@ -95,25 +123,30 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(93, 93, 93))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jlbQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnketthuc, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenDangNhap, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtMatKhau)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btndangnhap)
                                     .addComponent(jLabel3)
-                                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
+<<<<<<< HEAD
                 .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,6 +157,9 @@ public class JFrameLoginForm extends javax.swing.JFrame {
                         .addGap(79, 79, 79)
                         .addComponent(jckRememberName)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                .addGap(54, 54, 54))
+>>>>>>> hieuthu2
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,9 +168,9 @@ public class JFrameLoginForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
+                .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,11 +210,8 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDangNhapActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenDangNhapActionPerformed
-
     private void btndangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndangnhapActionPerformed
+<<<<<<< HEAD
          String dangNhap = txtTenDangNhap.getText();
         String matKhau = new String(txtMatKhau.getPassword());
 
@@ -211,6 +244,13 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         txtTenDangNhap.setText("");
                 txtMatKhau.setText("");
                 jckRememberName.setSelected(true);
+=======
+        dangNhap();
+    }//GEN-LAST:event_btndangnhapActionPerformed
+
+    private void btnketthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnketthucActionPerformed
+
+>>>>>>> hieuthu2
     }//GEN-LAST:event_btnketthucActionPerformed
 
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
@@ -251,7 +291,11 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameLoginForm().setVisible(true);
+                try {
+                    new JFrameLoginForm().setVisible(true);
+                } catch (SQLServerException ex) {
+                    Logger.getLogger(JFrameLoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -267,6 +311,6 @@ public class JFrameLoginForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox jckRememberName;
     private javax.swing.JLabel jlbQuenMatKhau;
     private javax.swing.JPasswordField txtMatKhau;
-    private javax.swing.JPasswordField txtTenDangNhap;
+    private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 }
