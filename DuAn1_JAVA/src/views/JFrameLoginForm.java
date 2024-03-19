@@ -4,9 +4,9 @@
  */
 package views;
 
-<<<<<<< HEAD
+
 import javax.swing.JOptionPane;
-=======
+
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,7 +15,6 @@ import model.NhanVien;
 import repository.Auth;
 import repository.MsgBox;
 import service.NhanVienService;
->>>>>>> hieuthu2
 
 /**
  *
@@ -67,11 +66,11 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         btnketthuc = new javax.swing.JButton();
         txtMatKhau = new javax.swing.JPasswordField();
         jlbQuenMatKhau = new javax.swing.JLabel();
-<<<<<<< HEAD
+
         jckRememberName = new javax.swing.JCheckBox();
-=======
+
         txtTenDangNhap = new javax.swing.JTextField();
->>>>>>> hieuthu2
+
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -146,7 +145,7 @@ public class JFrameLoginForm extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-<<<<<<< HEAD
+
                 .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,9 +156,9 @@ public class JFrameLoginForm extends javax.swing.JFrame {
                         .addGap(79, 79, 79)
                         .addComponent(jckRememberName)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-=======
+
                 .addGap(54, 54, 54))
->>>>>>> hieuthu2
+
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +210,7 @@ public class JFrameLoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btndangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndangnhapActionPerformed
-<<<<<<< HEAD
+
          String dangNhap = txtTenDangNhap.getText();
         String matKhau = new String(txtMatKhau.getPassword());
 
@@ -244,13 +243,13 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         txtTenDangNhap.setText("");
                 txtMatKhau.setText("");
                 jckRememberName.setSelected(true);
-=======
+
         dangNhap();
     }//GEN-LAST:event_btndangnhapActionPerformed
 
     private void btnketthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnketthucActionPerformed
 
->>>>>>> hieuthu2
+
     }//GEN-LAST:event_btnketthucActionPerformed
 
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
