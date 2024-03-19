@@ -94,7 +94,6 @@
                           </Group>
                       </Group>
                   </Group>
-<<<<<<< HEAD
                   <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
@@ -109,9 +108,9 @@
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
-=======
+
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
->>>>>>> hieuthu2
+
               </Group>
           </Group>
         </DimensionLayout>
@@ -193,7 +192,7 @@
             <Property name="text" type="java.lang.String" value="Qu&#xea;n m&#x1ead;t kh&#x1ea9;u ?"/>
           </Properties>
         </Component>
-<<<<<<< HEAD
+
         <Component class="javax.swing.JCheckBox" name="jckRememberName">
           <Properties>
             <Property name="text" type="java.lang.String" value="L&#x1b0;u th&#xf4;ng tin t&#xe0;i kho&#x1ea3;n"/>
@@ -201,9 +200,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jckRememberNameActionPerformed"/>
           </Events>
-=======
+
         <Component class="javax.swing.JTextField" name="txtTenDangNhap">
->>>>>>> hieuthu2
+
         </Component>
       </SubComponents>
     </Container>
