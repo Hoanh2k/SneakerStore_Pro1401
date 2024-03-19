@@ -127,6 +127,33 @@ public class NhanVienRepository {
             e.printStackTrace(System.out);
         }
     }
+    
+    public NhanVien getNhanVienByTenDangNhap(String tenDangNhap) {
+    String query = "SELECT * FROM NHAN_VIEN WHERE TenDangNhap = ?";
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setString(1, tenDangNhap);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            int maNV = resultSet.getInt("MaNV");
+            String matKhau = resultSet.getString("MatKhau");
+            String hoTen = resultSet.getString("HoTen");
+            int gioiTinh = resultSet.getInt("GioiTinh");
+            String dienThoai = resultSet.getString("DienThoai");
+            String email = resultSet.getString("Email");
+            java.sql.Date ngayTao = resultSet.getDate("NgayTao");
+            int chucVu = resultSet.getInt("ChucVu");
+            int trangThai = resultSet.getInt("TrangThai");
+
+            return new NhanVien(maNV, tenDangNhap, matKhau, hoTen, gioiTinh, dienThoai, email, ngayTao, chucVu, trangThai);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+    
+    
+
 
 //    public void addNhanVien(NhanVien nhanVien) {
 //    String query = "INSERT INTO NHAN_VIEN (MaNV, TenDangNhap, MatKhau, HoTen, GioiTinh, DienThoai, Email, NgayTao, ChucVu, TrangThai) "
