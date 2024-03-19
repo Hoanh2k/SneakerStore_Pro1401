@@ -9,6 +9,7 @@ import java.util.List;
 import model.chiTietSanPham;
 import model.sanPham;
 import java.sql.*;
+import model.hoaDon;
 import utilities.JdbcHelper;
 
 /**
@@ -87,5 +88,37 @@ public class banHangService {
         }
         return listMaDM;
     }
+    
+    //fill danh sach hoa don
+    public List<hoaDon> getAllHD(){
+        String query="""
+                     select HOA_DON.MaHD,NHAN_VIEN.HoTen, HOA_DON.NgayTao, HOA_DON.TrangThai from HOA_DON 
+                                                                                                join THONG_TIN_KH on HOA_DON.MaTTKH= THONG_TIN_KH.MaTTKH
+                                                                                                join NHAN_VIEN on HOA_DON.MaNV= NHAN_VIEN.MaNV
+                                                                                                where HOA_DON.TrangThai =0""";
+        List<hoaDon> listAll = new ArrayList<>();
+        try {
+            Connection conn = JdbcHelper.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {                
+                hoaDon hd = new hoaDon();
+                hd.setMaHD(rs.getInt("MaHD"));
+                hd.setTenNV(rs.getString("HoTen"));
+                hd.setNgayTao(rs.getDate("ngayTao"));
+                hd.setTrangThai(rs.getBoolean("trangThai"));
+                listAll.add(hd);
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listAll;
+    }
+    
 
 }

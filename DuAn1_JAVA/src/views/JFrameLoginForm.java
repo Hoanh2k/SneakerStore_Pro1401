@@ -4,6 +4,8 @@
  */
 package views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author trung
@@ -35,6 +37,7 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         btnketthuc = new javax.swing.JButton();
         txtMatKhau = new javax.swing.JPasswordField();
         jlbQuenMatKhau = new javax.swing.JLabel();
+        jckRememberName = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,6 +83,13 @@ public class JFrameLoginForm extends javax.swing.JFrame {
         jlbQuenMatKhau.setForeground(new java.awt.Color(255, 0, 51));
         jlbQuenMatKhau.setText("Quên mật khẩu ?");
 
+        jckRememberName.setText("Lưu thông tin tài khoản");
+        jckRememberName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jckRememberNameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -106,8 +116,13 @@ public class JFrameLoginForm extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jlbQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jlbQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jckRememberName)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -123,7 +138,9 @@ public class JFrameLoginForm extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(8, 8, 8)
+                .addComponent(jckRememberName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btndangnhap)
                     .addComponent(btnketthuc))
@@ -162,16 +179,47 @@ public class JFrameLoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTenDangNhapActionPerformed
 
     private void btndangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndangnhapActionPerformed
-        
+         String dangNhap = txtTenDangNhap.getText();
+        String matKhau = new String(txtMatKhau.getPassword());
+
+        StringBuilder sb = new StringBuilder();
+        if (dangNhap.equals("")) {
+            sb.append("Tên đăng nhập bị trống!\n");
+        }
+
+        if (matKhau.equals("")) {
+            sb.append("Mật khẩu bị trống!\n");
+        }
+        if (sb.length() > 0) {
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invadation",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (dangNhap.equals("fpt") && matKhau.equals("polytechnic")) {
+            JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
+            if (jckRememberName.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Lưu thông tin tài khoản thành công!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng!","Đăng nhập thất bại!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btndangnhapActionPerformed
 
     private void btnketthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnketthucActionPerformed
-       
+        txtTenDangNhap.setText("");
+                txtMatKhau.setText("");
+                jckRememberName.setSelected(true);
     }//GEN-LAST:event_btnketthucActionPerformed
 
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMatKhauActionPerformed
+
+    private void jckRememberNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jckRememberNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jckRememberNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,6 +264,7 @@ public class JFrameLoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JCheckBox jckRememberName;
     private javax.swing.JLabel jlbQuenMatKhau;
     private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JPasswordField txtTenDangNhap;

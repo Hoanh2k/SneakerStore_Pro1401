@@ -13,16 +13,19 @@ import java.util.Date;
 public class hoaDon {
 
     private int MaHD;
+    private String tenNV;
     private Date NgayTao;
     private double TongTien;
     private boolean TrangThai;
     private int MaTTKH;
     private int MaNV;
+    
     public hoaDon() {
     }
 
-    public hoaDon(int MaHD, Date NgayTao, double TongTien, boolean TrangThai, int MaTTKH, int MaNV) {
+    public hoaDon(int MaHD,String tenNV, Date NgayTao, double TongTien, boolean TrangThai, int MaTTKH, int MaNV) {
         this.MaHD = MaHD;
+        this.tenNV=tenNV;
         this.NgayTao = NgayTao;
         this.TongTien = TongTien;
         this.TrangThai = TrangThai;
@@ -36,6 +39,14 @@ public class hoaDon {
 
     public void setMaHD(int MaHD) {
         this.MaHD = MaHD;
+    }
+
+    public String getTenNV() {
+        return tenNV;
+    }
+
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
     }
 
     public Date getNgayTao() {
@@ -54,7 +65,7 @@ public class hoaDon {
         this.TongTien = TongTien;
     }
 
-    public boolean isTrangThai() {
+    public boolean getTrangThai() {
         return TrangThai;
     }
 
