@@ -144,16 +144,34 @@ public class JFrameNhanVien extends javax.swing.JFrame {
         int maNV = Integer.parseInt(txtMaNV.getText()); // Chuyển đổi thành số nguyên
 
         int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
-    if (dialogResult == JOptionPane.YES_OPTION) {
-        nhanVienService.delete(maNV);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            nhanVienService.delete(maNV);
 
-        loadTable();
-        clearForm();
-        JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadTable();
+            clearForm();
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+        }
+
     }
 
-    }
-
+//    
+//    public void search() {
+//        
+//        try {
+//            String tenDangNhap = txtSearch.getText();
+//            
+//            if (tenDangNhap.trim().isEmpty()) {
+//                tenDangNhap = null;
+//            }
+//            
+//            nhanVienService.findById(tenDangNhap);
+//            loadTable();
+//
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,7 +212,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
         txtSDT = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtSDTNV1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jpnCRUD2 = new javax.swing.JPanel();
         btnThemNhanVien = new javax.swing.JButton();
         btnUpdateNhanVien = new javax.swing.JButton();
@@ -309,6 +327,8 @@ public class JFrameNhanVien extends javax.swing.JFrame {
 
         jLabel1.setText("Mã nhân viên : ");
 
+        txtMaNV.setEnabled(false);
+
         jLabel4.setText("Tên đăng nhập :");
 
         jLabel5.setText("Mật khẩu :");
@@ -410,6 +430,11 @@ public class JFrameNhanVien extends javax.swing.JFrame {
         );
 
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         cboChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Nhân Viên" }));
 
@@ -421,7 +446,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSDTNV1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnTimKiem)
                 .addGap(61, 61, 61))
@@ -487,7 +512,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtSDTNV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -591,6 +616,15 @@ public class JFrameNhanVien extends javax.swing.JFrame {
         mouseClick();
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        String ten = txtSearch.getText();
+        if (ten.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin");
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tồn tại");
+        }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -671,7 +705,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField txtMatKhau;
     private javax.swing.JTextField txtNgayTao;
     private javax.swing.JTextField txtSDT;
-    private javax.swing.JTextField txtSDTNV1;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 }
