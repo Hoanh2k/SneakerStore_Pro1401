@@ -11,8 +11,11 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.NhanVien;
+import repository.Auth;
 import repository.NhanVienRepository;
 import service.NhanVienService;
 
@@ -117,7 +120,10 @@ public class JFrameNhanVien extends javax.swing.JFrame {
     }
 
     public void addNhanVien() {
+        //boolean xacthuc = Auth.User.getChucVu();
+
         try {
+
             int check = JOptionPane.showConfirmDialog(this, "bạn có muốn thêm không");
             if (check != JOptionPane.YES_OPTION) {
                 return;
@@ -154,7 +160,44 @@ public class JFrameNhanVien extends javax.swing.JFrame {
 
     }
 
-//    
+    // Sửa lại phương thức updateGiamGia
+    public void updateNhanVien() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không?");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            NhanVien nhanVien = getDataNhanVien();
+            int selectedRow = tblNhanVien.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Chọn một dòng để cập nhật");
+                return;
+            }
+
+            int id = Integer.parseInt(tblNhanVien.getValueAt(selectedRow, 0).toString()); // Lấy mã nhân viên từ cột đầu tiên
+            String index = null;
+            nhanVienService.update(nhanVien, index);
+
+            loadTable();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+
+            clearForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+        }
+    }
+
+    public void search() throws SQLServerException {
+        DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        tblNhanVien.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(txtSearch.getText()));
+        if (txtSearch.getText() == null) {
+            loadTable();
+        }
+    }
+
 //    public void search() {
 //        
 //        try {
@@ -597,7 +640,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemNhanVienActionPerformed
 
     private void btnUpdateNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNhanVienActionPerformed
-        // TODO add your handling code here:
+        updateNhanVien();
     }//GEN-LAST:event_btnUpdateNhanVienActionPerformed
 
     private void btnXoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNhanVienActionPerformed
@@ -617,11 +660,16 @@ public class JFrameNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        String ten = txtSearch.getText();
-        if (ten.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin");
-        } else {
-            JOptionPane.showMessageDialog(this, "Không tồn tại");
+        try {
+            //        String ten = txtSearch.getText();
+//        if (ten.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin");
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Không tồn tại");
+//        
+            search();
+        } catch (SQLServerException ex) {
+            Logger.getLogger(JFrameNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 

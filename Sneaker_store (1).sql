@@ -291,6 +291,10 @@ select * from MAU_SAC
 select * from CHAT_LIEU
 select * from CHAT_LIEU_DE_GIAY
 select * from SIZE
+select * from HOA_DON
 
+ALTER TABLE hoa_don DROP CONSTRAINT df_TrangThai
 
+ALTER TABLE hoa_don
+ALTER COLUMN TrangThai nvarchar(50)
 

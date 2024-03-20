@@ -29,6 +29,7 @@ public class GiamGiaService implements GiamGiaInterface<GiamGia>{
 
     @Override
     public void update(GiamGia giamGia, String index) {
+        this.giamGiaRepository.updateGiamGia(giamGia);
       //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -46,6 +47,10 @@ public class GiamGiaService implements GiamGiaInterface<GiamGia>{
 
     @Override
     public GiamGia findById(String index) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

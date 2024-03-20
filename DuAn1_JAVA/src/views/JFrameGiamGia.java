@@ -9,7 +9,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.GiamGia;
 import repository.GiamGiaRepository;
 import service.GiamGiaService;
@@ -123,6 +125,36 @@ public class JFrameGiamGia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Xóa giảm giá thành công");
         }
 
+    }
+
+    public void updateGiamGia() {
+        try {
+            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
+            if (check != JOptionPane.YES_OPTION) {
+                return;
+            }
+            GiamGia giamGia = getDataGiamGia();
+            int row = tblGiamGia.getSelectedRow();
+            int id = giamGiaService.findAll().get(row).getMaGG();
+            String index = null;
+            giamGiaService.update(giamGia, index);
+            loadTable();
+            JOptionPane.showMessageDialog(this, "Update thành công");
+
+            clearForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Update thất bại");
+        }
+    }
+
+    public void search() throws SQLServerException {
+        DefaultTableModel model = (DefaultTableModel) tblGiamGia.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        tblGiamGia.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(txtSearch.getText()));
+        if (txtSearch.getText() == null) {
+            loadTable();
+        }
     }
 
     /**
@@ -494,7 +526,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaNhanVienActionPerformed
 
     private void btnUpdateNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNhanVienActionPerformed
-        // TODO add your handling code here:
+        updateGiamGia();
     }//GEN-LAST:event_btnUpdateNhanVienActionPerformed
 
     private void btnThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhanVienActionPerformed
@@ -506,11 +538,16 @@ public class JFrameGiamGia extends javax.swing.JFrame {
     }//GEN-LAST:event_tblGiamGiaMouseClicked
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        String ten = txtSearch.getText();
-        if (ten.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin");
-        } else {
-           JOptionPane.showMessageDialog(this, "Không tồn tại");
+        try {
+            //        String ten = txtSearch.getText();
+//        if (ten.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin");
+//        } else {
+//           JOptionPane.showMessageDialog(this, "Không tồn tại");
+//        }
+            search();
+        } catch (SQLServerException ex) {
+            Logger.getLogger(JFrameGiamGia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 

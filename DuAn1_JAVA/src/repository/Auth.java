@@ -19,7 +19,14 @@ public class Auth {
     }
 
     public static Boolean isLogin() {
-        return Auth.User != null;
+        if(Auth.User == null){
+            return true;
+        } else{
+            return false;
+        }              
+    }
+    public static int isManager() {
+        return User.getChucVu();
     }
  
 }

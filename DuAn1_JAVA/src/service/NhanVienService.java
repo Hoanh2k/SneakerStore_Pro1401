@@ -30,6 +30,7 @@ public class NhanVienService implements NhanVienInterface<NhanVien> {
 
     @Override
     public void update(NhanVien nhanvien, String index) {
+        this.nhanVienRepository.update(nhanvien, index);
         // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

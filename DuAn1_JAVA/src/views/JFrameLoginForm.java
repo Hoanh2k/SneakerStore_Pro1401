@@ -20,16 +20,17 @@ import service.NhanVienService;
 public class JFrameLoginForm extends javax.swing.JFrame {
 
     private NhanVienService nhanVienService;
-   
+
     /**
      * Creates new form JFrameLoginForm
      */
     public JFrameLoginForm() throws SQLServerException {
         initComponents();
         this.nhanVienService = new NhanVienService();
+        setLocationRelativeTo(null);
     }
-    
-     private void dangNhap() {
+
+    private void dangNhap() {
         String tenDangNhap = txtTenDangNhap.getText();
         String matKhau = new String(txtMatKhau.getPassword());
         NhanVien nv = nhanVienService.selectByTenDangNhap(tenDangNhap);
@@ -185,7 +186,7 @@ public class JFrameLoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btndangnhapActionPerformed
 
     private void btnketthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnketthucActionPerformed
-       
+
     }//GEN-LAST:event_btnketthucActionPerformed
 
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
@@ -244,4 +245,3 @@ public class JFrameLoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 }
-

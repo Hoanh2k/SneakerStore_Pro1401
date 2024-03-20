@@ -4,6 +4,10 @@
  */
 package views;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author trung
@@ -236,7 +240,11 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         setVisible(false);
-        new JFrameLoginForm().setVisible(true);
+        try {
+            new JFrameLoginForm().setVisible(true);
+        } catch (SQLServerException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

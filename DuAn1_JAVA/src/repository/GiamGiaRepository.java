@@ -88,7 +88,7 @@ public class GiamGiaRepository {
 
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, giamGia.getTenMaGiam());
-            stm.setFloat(2, giamGia.getMucGiam());                    
+            stm.setFloat(2, giamGia.getMucGiam());
             stm.setDate(3, new java.sql.Date(giamGia.getNgayBatDau().getTime()));
             stm.setDate(4, new java.sql.Date(giamGia.getNgayKetThuc().getTime()));
             stm.setString(5, giamGia.getGhiChu());
@@ -120,6 +120,38 @@ public class GiamGiaRepository {
             }
         } catch (Exception e) {
             e.printStackTrace(System.out);
+        }
+    }
+
+    // Cập nhật thông tin giảm giá
+    public void updateGiamGia(GiamGia giamGia) {
+        if (giamGia == null) {
+            return;
+        }
+
+        String sql = """
+    UPDATE Giam_Gia
+    SET TenMaGiam = ?, MucGiam = ?, NgayBatDau = ?, NgayKetThuc = ?, GhiChu = ?
+    WHERE MaGG = ?
+    """;
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, giamGia.getTenMaGiam());
+            stm.setFloat(2, giamGia.getMucGiam());
+            stm.setDate(3, new java.sql.Date(giamGia.getNgayBatDau().getTime()));
+            stm.setDate(4, new java.sql.Date(giamGia.getNgayKetThuc().getTime()));
+            stm.setString(5, giamGia.getGhiChu());
+            stm.setInt(6, giamGia.getMaGG());
+
+            int check = stm.executeUpdate();
+
+            if (check > 0) {
+                System.out.println("Cập nhật giảm giá thành công");
+            } else {
+                System.out.println("Cập nhật giảm giá thất bại");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
