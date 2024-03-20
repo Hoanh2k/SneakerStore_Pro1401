@@ -4,6 +4,8 @@
  */
 package duan1_java;
 
+import views.JFrameMain;
+
 /**
  *
  * @author trung
@@ -14,6 +16,7 @@ public class DuAn1_JAVA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        new JFrameMain().setVisible(true);
         // TODO code application logic here
     }
     

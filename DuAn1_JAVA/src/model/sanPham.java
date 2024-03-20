@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author ADMIN
  */
-public class sanPham {
+public class SanPham {
     private int MaSP;
     private String TenSP;
     private Date NgayNhap;
@@ -14,10 +14,10 @@ public class sanPham {
     private boolean TrangThai;
     private int MaDM;
 
-    public sanPham() {
+    public SanPham() {
     }
 
-    public sanPham(int MaSP, String TenSP, Date NgayNhap, Date NgayCapNhat, boolean TrangThai, int MaDM) {
+    public SanPham(int MaSP, String TenSP, Date NgayNhap, Date NgayCapNhat, boolean TrangThai, int MaDM) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.NgayNhap = NgayNhap;

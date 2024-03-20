@@ -4,15 +4,15 @@ package model;
  *
  * @author ADMIN
  */
-public class danhMuc {
+public class DanhMuc {
     private int MaDM;
     private String TenDanhMuc;
     private boolean TrangThai;
     
-    public danhMuc(){
+    public DanhMuc(){
     }
 
-    public danhMuc(int MaDM, String TenDanhMuc, boolean TrangThai) {
+    public DanhMuc(int MaDM, String TenDanhMuc, boolean TrangThai) {
         this.MaDM = MaDM;
         this.TenDanhMuc = TenDanhMuc;
         this.TrangThai = TrangThai;

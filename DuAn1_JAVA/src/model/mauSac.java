@@ -4,15 +4,15 @@ package model;
  *
  * @author ADMIN
  */
-public class mauSac {
+public class MauSac {
     private int MaMS;
     private String TenMau;
-    private boolean TrangThai;
+        private boolean TrangThai;
 
-    public mauSac() {
+    public MauSac() {
     }
 
-    public mauSac(int MaMS, String TenMau, boolean TrangThai) {
+    public MauSac(int MaMS, String TenMau, boolean TrangThai) {
         this.MaMS = MaMS;
         this.TenMau = TenMau;
         this.TrangThai = TrangThai;
@@ -41,5 +41,11 @@ public class mauSac {
     public void setTrangThai(boolean TrangThai) {
         this.TrangThai = TrangThai;
     }
+
+    public MauSac(String TenMau, boolean TrangThai) {
+        this.TenMau = TenMau;
+        this.TrangThai = TrangThai;
+    }
+    
     
 }

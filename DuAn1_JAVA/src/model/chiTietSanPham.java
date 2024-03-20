@@ -4,7 +4,7 @@ package model;
  *
  * @author ADMIN
  */
-public class chiTietSanPham {
+public class ChiTietSanPham {
     private int MaCTSP;
     private int SoLuong;
     private float DonGia;
@@ -16,10 +16,10 @@ public class chiTietSanPham {
     private String MoTa;
     private int MaGG;
 
-    public chiTietSanPham() {
+    public ChiTietSanPham() {
     }
 
-    public chiTietSanPham(int MaCTSP, int SoLuong, float DonGia, int MaSP, int MaCLDe, int MaSize, int MaMS, int MaCL, String MoTa, int MaGG) {
+    public ChiTietSanPham(int MaCTSP, int SoLuong, float DonGia, int MaSP, int MaCLDe, int MaSize, int MaMS, int MaCL, String MoTa, int MaGG) {
         this.MaCTSP = MaCTSP;
         this.SoLuong = SoLuong;
         this.DonGia = DonGia;

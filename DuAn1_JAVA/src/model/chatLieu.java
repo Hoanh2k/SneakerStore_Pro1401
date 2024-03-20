@@ -4,15 +4,15 @@ package model;
  *
  * @author ADMIN
  */
-public class chatLieu {
-    private int MaCL;
+public class ChatLieu {
+    private int MaCL;   
     private String TenChatLieu;
     private boolean TrangThai;
 
-    public chatLieu() {
+    public ChatLieu() {
     }
 
-    public chatLieu(int MaCL, String TenChatLieu, boolean TrangThai) {
+    public ChatLieu(int MaCL, String TenChatLieu, boolean TrangThai) {
         this.MaCL = MaCL;
         this.TenChatLieu = TenChatLieu;
         this.TrangThai = TrangThai;
