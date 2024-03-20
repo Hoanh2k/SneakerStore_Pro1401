@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\DFK\\Downloads\\library-20240318T001048Z-001\\library\\lich\\jcalendar-1.4.jar",
+        "d:\\IUH\\HSK\\onTapCK\\lib\\sqljdbc42.jar",
+        "d:\\IUH\\HSK\\onTapCK\\lib\\mssql-jdbc-12.4.2.jre8.jar"
+    ]
+}
