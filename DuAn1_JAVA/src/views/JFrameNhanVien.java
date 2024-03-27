@@ -160,7 +160,7 @@ public class JFrameNhanVien extends javax.swing.JFrame {
 
     }
 
-    // Sửa lại phương thức updateGiamGia
+    // Sửa lại phương thức update
     public void updateNhanVien() {
         try {
             int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không?");

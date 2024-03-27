@@ -5,6 +5,7 @@
 package views;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -258,7 +259,11 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void btnVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoucherActionPerformed
         setVisible(false);
-        new JFrameVoucher().setVisible(true);
+        try {
+            new JFrameGiamGia().setVisible(true);
+        } catch (SQLServerException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVoucherActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
@@ -268,12 +273,20 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void btnTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiKhoanActionPerformed
         setVisible(false);
-        new JFrameTaiKhoan().setVisible(true);
+        try {
+            new JFrameNhanVien().setVisible(true);
+        } catch (SQLServerException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
          setVisible(false);
-        new JFrameThongKe().setVisible(true);
+        try {
+            new JFrameThongKe().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     /**

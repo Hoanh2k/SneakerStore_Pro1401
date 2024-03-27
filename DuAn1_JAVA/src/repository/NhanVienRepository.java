@@ -128,62 +128,6 @@ public class NhanVienRepository {
         }
     }
 
-    public NhanVien getNhanVienByTenDangNhap(String tenDangNhap) {
-        String query = "SELECT * FROM NHAN_VIEN WHERE TenDangNhap = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, tenDangNhap);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                int maNV = resultSet.getInt("MaNV");
-                String matKhau = resultSet.getString("MatKhau");
-                String hoTen = resultSet.getString("HoTen");
-                int gioiTinh = resultSet.getInt("GioiTinh");
-                String dienThoai = resultSet.getString("DienThoai");
-                String email = resultSet.getString("Email");
-                java.sql.Date ngayTao = resultSet.getDate("NgayTao");
-                int chucVu = resultSet.getInt("ChucVu");
-                int trangThai = resultSet.getInt("TrangThai");
-
-                return new NhanVien(maNV, tenDangNhap, matKhau, hoTen, gioiTinh, dienThoai, email, ngayTao, chucVu, trangThai);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    // Sửa lại phương thức updateNhanVien trong NhanVienService
-    public void update(NhanVien nhanVien, String index) {
-        String sql = """
-        UPDATE NHAN_VIEN
-        SET TenDangNhap = ?, MatKhau = ?, HoTen = ?, GioiTinh = ?, DienThoai = ?, Email = ?, NgayTao = ?, ChucVu = ?, TrangThai = ?
-        WHERE MaNV = ?
-        """;
-
-        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
-            stm.setString(1, nhanVien.getTenDangNhap());
-            stm.setString(2, nhanVien.getMatKhau());
-            stm.setString(3, nhanVien.getHoTen());
-            stm.setBoolean(4, nhanVien.isGioiTinh());
-            stm.setString(5, nhanVien.getDienThoai());
-            stm.setString(6, nhanVien.getEmail());
-            stm.setDate(7, new java.sql.Date(nhanVien.getNgayTao().getTime()));
-            stm.setBoolean(8, nhanVien.isChucVu());
-            stm.setBoolean(9, nhanVien.isTrangThai());
-            stm.setInt(10, nhanVien.getMaNv());
-
-            int check = stm.executeUpdate();
-
-            if (check > 0) {
-                System.out.println("Cập nhật nhân viên thành công");
-            } else {
-                System.out.println("Cập nhật nhân viên thất bại");
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 //    public void addNhanVien(NhanVien nhanVien) {
 //    String query = "INSERT INTO NHAN_VIEN (MaNV, TenDangNhap, MatKhau, HoTen, GioiTinh, DienThoai, Email, NgayTao, ChucVu, TrangThai) "
 //            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -208,4 +152,62 @@ public class NhanVienRepository {
 //        e.printStackTrace();
 //    }
 //}
+    
+    
+    public NhanVien getNhanVienByTenDangNhap(String tenDangNhap) {
+    String query = "SELECT * FROM NHAN_VIEN WHERE TenDangNhap = ?";
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setString(1, tenDangNhap);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            int maNV = resultSet.getInt("MaNV");
+            String matKhau = resultSet.getString("MatKhau");
+            String hoTen = resultSet.getString("HoTen");
+            int gioiTinh = resultSet.getInt("GioiTinh");
+            String dienThoai = resultSet.getString("DienThoai");
+            String email = resultSet.getString("Email");
+            java.sql.Date ngayTao = resultSet.getDate("NgayTao");
+            int chucVu = resultSet.getInt("ChucVu");
+            int trangThai = resultSet.getInt("TrangThai");
+
+            return new NhanVien(maNV, tenDangNhap, matKhau, hoTen, gioiTinh, dienThoai, email, ngayTao, chucVu, trangThai);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+    
+    // Sửa lại phương thức updateNhanVien trong NhanVienService
+    public void update(NhanVien nhanVien, String index) {
+        String sql = """
+        UPDATE NHAN_VIEN
+        SET TenDangNhap = ?, MatKhau = ?, HoTen = ?, GioiTinh = ?, DienThoai = ?, Email = ?, NgayTao = ?, ChucVu = ?, TrangThai = ?
+        WHERE MaNV = ?
+        """;
+
+        try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, nhanVien.getTenDangNhap());
+            stm.setString(2, nhanVien.getMatKhau());
+            stm.setString(3, nhanVien.getHoTen());
+            stm.setInt(4, nhanVien.getGioiTinh());
+            stm.setString(5, nhanVien.getDienThoai());
+            stm.setString(6, nhanVien.getEmail());
+            stm.setDate(7, new java.sql.Date(nhanVien.getNgayTao().getTime()));
+            stm.setInt(8, nhanVien.getChucVu());
+            stm.setInt(9, nhanVien.getTrangThai());
+            stm.setInt(10, nhanVien.getMaNv());
+
+            int check = stm.executeUpdate();
+
+            if (check > 0) {
+                System.out.println("Cập nhật nhân viên thành công");
+            } else {
+                System.out.println("Cập nhật nhân viên thất bại");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

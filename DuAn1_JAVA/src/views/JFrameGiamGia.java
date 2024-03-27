@@ -9,9 +9,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import model.GiamGia;
 import repository.GiamGiaRepository;
 import service.GiamGiaService;
@@ -127,36 +125,6 @@ public class JFrameGiamGia extends javax.swing.JFrame {
 
     }
 
-    public void updateGiamGia() {
-        try {
-            int check = JOptionPane.showConfirmDialog(this, "bạn có muốn update không");
-            if (check != JOptionPane.YES_OPTION) {
-                return;
-            }
-            GiamGia giamGia = getDataGiamGia();
-            int row = tblGiamGia.getSelectedRow();
-            int id = giamGiaService.findAll().get(row).getMaGG();
-            String index = null;
-            giamGiaService.update(giamGia, index);
-            loadTable();
-            JOptionPane.showMessageDialog(this, "Update thành công");
-
-            clearForm();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Update thất bại");
-        }
-    }
-
-    public void search() throws SQLServerException {
-        DefaultTableModel model = (DefaultTableModel) tblGiamGia.getModel();
-        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
-        tblGiamGia.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(txtSearch.getText()));
-        if (txtSearch.getText() == null) {
-            loadTable();
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -170,6 +138,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         btnTieuDe = new javax.swing.JButton();
         btnVoucher = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
+        btnGiamGiaSanPham = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -177,7 +146,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         txtGhiChu = new javax.swing.JTextField();
         txtNgayKetThuc = new javax.swing.JTextField();
         txtNgayBatDau = new javax.swing.JTextField();
@@ -230,27 +199,42 @@ public class JFrameGiamGia extends javax.swing.JFrame {
             }
         });
 
+        btnGiamGiaSanPham.setBackground(new java.awt.Color(204, 204, 255));
+        btnGiamGiaSanPham.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnGiamGiaSanPham.setForeground(new java.awt.Color(0, 0, 255));
+        btnGiamGiaSanPham.setText("Áp dụng giảm giá");
+        btnGiamGiaSanPham.setBorder(new javax.swing.border.MatteBorder(null));
+        btnGiamGiaSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiamGiaSanPhamActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnNavigationLayout = new javax.swing.GroupLayout(jpnNavigation);
         jpnNavigation.setLayout(jpnNavigationLayout);
         jpnNavigationLayout.setHorizontalGroup(
             jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnTieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
             .addGroup(jpnNavigationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jpnNavigationLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(btnHome)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpnNavigationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGiamGiaSanPham, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jpnNavigationLayout.setVerticalGroup(
             jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnNavigationLayout.createSequentialGroup()
                 .addComponent(btnTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 431, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGiamGiaSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnHome)
                 .addGap(31, 31, 31))
         );
@@ -290,8 +274,6 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         jLabel13.setText("Tìm kiếm mã giảm giá :");
 
         jLabel1.setText("Mã GG :");
-
-        txtMaGG.setEnabled(false);
 
         jLabel4.setText("Tên mã giảm :");
 
@@ -366,11 +348,6 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         jLabel5.setText("Mức giảm :");
 
         btnTimKiem.setText("Tìm kiếm");
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
-            }
-        });
 
         tblGiamGia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -398,7 +375,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnTimKiem)
                 .addGap(61, 61, 61))
@@ -445,7 +422,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -505,7 +482,11 @@ public class JFrameGiamGia extends javax.swing.JFrame {
 
     private void btnVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoucherActionPerformed
         setVisible(false);
-        new JFrameMain().setVisible(true);
+        try {
+            new JFrameGiamGia().setVisible(true);
+        } catch (SQLServerException ex) {
+            Logger.getLogger(JFrameGiamGia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVoucherActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
@@ -526,7 +507,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaNhanVienActionPerformed
 
     private void btnUpdateNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNhanVienActionPerformed
-        updateGiamGia();
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateNhanVienActionPerformed
 
     private void btnThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhanVienActionPerformed
@@ -537,19 +518,14 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         mouseClick();
     }//GEN-LAST:event_tblGiamGiaMouseClicked
 
-    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+    private void btnGiamGiaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiamGiaSanPhamActionPerformed
+        setVisible(false);
         try {
-            //        String ten = txtSearch.getText();
-//        if (ten.isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin");
-//        } else {
-//           JOptionPane.showMessageDialog(this, "Không tồn tại");
-//        }
-            search();
+            new JFrameGiamGiaSanPham().setVisible(true);
         } catch (SQLServerException ex) {
             Logger.getLogger(JFrameGiamGia.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnTimKiemActionPerformed
+    }//GEN-LAST:event_btnGiamGiaSanPhamActionPerformed
 
     /**
      * @param args the command line arguments
@@ -580,6 +556,18 @@ public class JFrameGiamGia extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -595,6 +583,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear2;
+    private javax.swing.JButton btnGiamGiaSanPham;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnThemNhanVien;
     private javax.swing.JButton btnTieuDe;
@@ -621,7 +610,7 @@ public class JFrameGiamGia extends javax.swing.JFrame {
     private javax.swing.JTextField txtMucGiam;
     private javax.swing.JTextField txtNgayBatDau;
     private javax.swing.JTextField txtNgayKetThuc;
-    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTenGG;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

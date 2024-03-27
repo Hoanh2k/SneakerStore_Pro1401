@@ -18,15 +18,16 @@ public class Auth {
         Auth.User = null;
     }
 
-    public static Boolean isLogin() {
-        if(Auth.User == null){
+    public static boolean isLogin() {
+        if(Auth.User == null) {
             return true;
-        } else{
+        } else {
             return false;
-        }              
+        }
     }
+    
     public static int isManager() {
-        return User.getChucVu();
+        return  User.getChucVu();
     }
  
 }

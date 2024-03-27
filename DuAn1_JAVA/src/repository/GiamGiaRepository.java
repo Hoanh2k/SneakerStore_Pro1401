@@ -88,7 +88,7 @@ public class GiamGiaRepository {
 
         try (Connection con = JdbcHelper.getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, giamGia.getTenMaGiam());
-            stm.setFloat(2, giamGia.getMucGiam());
+            stm.setFloat(2, giamGia.getMucGiam());                    
             stm.setDate(3, new java.sql.Date(giamGia.getNgayBatDau().getTime()));
             stm.setDate(4, new java.sql.Date(giamGia.getNgayKetThuc().getTime()));
             stm.setString(5, giamGia.getGhiChu());
@@ -122,7 +122,7 @@ public class GiamGiaRepository {
             e.printStackTrace(System.out);
         }
     }
-
+    
     // Cập nhật thông tin giảm giá
     public void updateGiamGia(GiamGia giamGia) {
         if (giamGia == null) {

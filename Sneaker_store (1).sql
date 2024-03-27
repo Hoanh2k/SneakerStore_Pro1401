@@ -25,6 +25,8 @@ CREATE TABLE SAN_PHAM
 	FOREIGN KEY (MaDM) REFERENCES DANH_MUC(MaDM)
 )
 GO
+select * from SAN_PHAM
+
 insert into SAN_PHAM values( N'Giày Voremo ', '2024-03-03', '2024-03-03', 1,1)
 insert into SAN_PHAM values( N'Giày AriForce ', '2024-03-03', '2024-03-03', 1,2)
 insert into SAN_PHAM values( N'Giày Flex Experience ', '2024-03-03', '2024-03-03', 1,1)
@@ -174,6 +176,10 @@ create table HOA_DON(
 	foreign key (MaNV) references  NHAN_VIEN(MaNV),
 )
 GO
+
+select * from HOA_DON
+
+
 --ALTER TABLE Hoa_Don ALTER COLUMN TrangThai BIT;
 
 
@@ -285,7 +291,9 @@ FOREIGN KEY (MaGG) REFERENCES Giam_Gia(MaGG);
 select * from NHAN_VIEN
 select * from Giam_Gia
 
+
 select * from SAN_PHAM
+select * from CHI_TIET_SAN_PHAM
 select * from DANH_MUC
 select * from MAU_SAC
 select * from CHAT_LIEU
